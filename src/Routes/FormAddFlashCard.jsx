@@ -1,10 +1,12 @@
 import { useRef, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { addFashcradAction } from "../component/FlashcardSlice"
+import { addFashcradAction, AddFlashcard } from "../component/FlashcardSlice"
 
 
 export const FormAddFlashcard=()=>{
+
+  const flashcards= useSelector(state=>state.flashcard.flashcards)
 
   const dispatch= useDispatch()
   const navigate=useNavigate()
@@ -40,10 +42,11 @@ export const FormAddFlashcard=()=>{
 
     const flashcard={
       question:questionRef.current.value,
-      solution:explicationRef.current.value
+      solution:explicationRef.current.value,
+      number:flashcards.length+1
     }
 
-    dispatch(addFashcradAction(flashcard))
+    dispatch(AddFlashcard(flashcard))
     navigate("/")
   }
 

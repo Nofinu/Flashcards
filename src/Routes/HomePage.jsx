@@ -1,10 +1,23 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { FetchFlashcard } from "../component/FlashcardSlice"
 
 
 export const HomePage=()=>{
 
   const flashcards = useSelector(state=>state.flashcard.flashcards)
+  const dispatch=useDispatch()
+
+  console.log(flashcards)
+
+  const refreshFlashcard= async ()=>{
+    await dispatch(FetchFlashcard())
+  }
+
+  useEffect(()=>{
+    refreshFlashcard()
+  },[])
 
   return(
     <div className="ContainerHomePage">
@@ -21,7 +34,7 @@ export const HomePage=()=>{
       <h2>Liste des flashcards</h2>
       <div className="flashcardContainer">
         {
-          flashcards && flashcards.map(flash=><Link className="flashcardLink" key={flash.id} to={`/flashcard/${flash.id}`}>FlashCard n°{flash.id}</Link>)
+          flashcards && flashcards.map(flash=><Link className="flashcardLink" key={flash.id} to={`/flashcard/${flash.id}`}>FlashCard n°{flash.number}</Link>)
         }
       </div>
     </div>

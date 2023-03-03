@@ -1,9 +1,13 @@
 import './App.css';
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
+import { removeUser } from './component/AuthSlice';
 
 function App() {
+
+  const user = useSelector(state=>state.auth.user)
+  const dispatch=useDispatch()
 
   const flashcards = useSelector(state=>state.flashcard.flashcards)
 
@@ -24,6 +28,10 @@ function App() {
     }
   }
 
+  const onClickLogOut=()=>{
+    dispatch(removeUser())
+  }
+
   useEffect(()=>{
     setRndmNumber(rndmFlashcard()) 
   },[flashcards])
@@ -40,7 +48,15 @@ function App() {
           {flashcards&&
             <div>
             <input type="number" min={1} max={flashcards.length} ref={inputRef}/>
-            <button onClick={onClickSearchHandler}>sens</button>
+            <button onClick={onClickSearchHandler}>send</button>
+            {
+              user?<NavLink className="navlinkLog" onClick={onClickLogOut} to="/">Log out</NavLink>
+              :
+              <>
+                <NavLink className="navlinkLog" to="/log?mode=in">Log In</NavLink>
+                <NavLink className="navlinkLog" to="/log?mode=up">Log Up</NavLink>
+              </>
+            }
           </div>
           }
         </nav>

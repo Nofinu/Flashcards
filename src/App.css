@@ -22,6 +22,15 @@
   color: var(--white--);
   margin-left: 15px;
 }
+.navlinkLog{
+  text-decoration: none;
+  color: white;
+  border: solid white 1px;
+  margin: 0 10px 0 15px;
+  padding: 3px;
+  border-radius: 5px;
+  text-align: center;
+}
 
 
 .ContainerHomePage{
@@ -168,3 +177,4 @@
   overflow: auto;
   margin: 10px auto;
 }
+

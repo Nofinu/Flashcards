@@ -12,7 +12,7 @@ export const FlashCardDisplay=()=>{
   let flashcardFound
 
   if(id){
-    flashcardFound = flashcards.find(flash=>flash.id===+id)
+    flashcardFound = flashcards.find(flash=>flash.id===id)
   }
 
   const onClickAfficheSolutionHandler=()=>{
@@ -21,7 +21,7 @@ export const FlashCardDisplay=()=>{
 
   return(
     <div className="DisplayContainer">
-      <h2>flashcard n°{id} : {flashcardFound && flashcardFound.question}</h2>
+      <h2>flashcard n°{flashcardFound.number} : {flashcardFound && flashcardFound.question}</h2>
       <hr />
       <div>
       <div onClick={onClickAfficheSolutionHandler} className="questionPrevisualisationDisplay"><p> Solution</p> <img src={afficheSolution ?"https://icons.getbootstrap.com/assets/icons/caret-up-fill.svg" :"https://icons.getbootstrap.com/assets/icons/caret-down-fill.svg"} alt="" /></div>
